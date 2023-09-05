@@ -110,7 +110,7 @@ fn list() -> Result<(), Box<dyn Error>> {
 		file.read_exact(&mut buf)?;
 		let key = Key::import(buf);
 		let code = key.code(now)?;
-		println!("{name} {code} ({}s)", code.ttl().as_secs());
+		println!("{name}\t{code} ({}s)", code.ttl().as_secs());
 	}
 }
 
