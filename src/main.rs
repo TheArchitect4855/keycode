@@ -2,7 +2,7 @@ mod args;
 use std::{error::Error, process, fs::{File, OpenOptions}, io::{self, Write, Read, Seek, SeekFrom}, time::SystemTime};
 use args::*;
 use clap::Parser;
-use keycode::Key;
+use keycode::{Key, base32};
 
 fn main() {
 	let args = Cli::parse();
@@ -39,6 +39,9 @@ fn generate(name: String) -> Result<(), Box<dyn Error>> {
 
 	let buf = key.as_bytes();
 	keyfile.write_all(buf)?;
+
+	let b32 = base32::encode(key.as_bytes());
+	println!("{b32}");
 	Ok(())
 }
 
